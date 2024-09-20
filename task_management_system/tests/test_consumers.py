@@ -2,7 +2,9 @@ from asgiref.sync import sync_to_async
 from channels.layers import get_channel_layer
 from channels.routing import URLRouter, ProtocolTypeRouter
 from channels.testing import WebsocketCommunicator
+from django.contrib.auth.models import User
 from django.test import TransactionTestCase
+from rest_framework_simplejwt.tokens import AccessToken
 
 from task_management_system.models import Task, TaskStatus
 from task_management_system.routing import websocket_urlpatterns
@@ -14,7 +16,19 @@ application = ProtocolTypeRouter({
 
 class TaskStatusConsumerTest(TransactionTestCase):
     async def test_websocket_receive_notification(self):
-        communicator = WebsocketCommunicator(application, "/ws/tasks/status/")
+        user = await sync_to_async(User.objects.create_user)(
+            username='testuser', password='testpass'
+        )
+        access_token = str(AccessToken.for_user(user))
+
+        communicator = WebsocketCommunicator(
+            application,
+            "/ws/tasks/status/",
+            headers=[
+                (b'authorization', f'Bearer {access_token}'.encode())
+            ]
+        )
+
         connected, _ = await communicator.connect()
         self.assertTrue(connected)
 

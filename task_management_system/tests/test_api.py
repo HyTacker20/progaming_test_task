@@ -1,12 +1,22 @@
+from django.contrib.auth.models import User
 from rest_framework.test import APITestCase
 from django.urls import reverse
 from rest_framework import status
+from rest_framework_simplejwt.tokens import RefreshToken
+
 from task_management_system.models import Task, TaskStatus, TaskPriority
 from task_management_system.serializers import TaskSerializer
 
 
 class TaskAPITest(APITestCase):
     def setUp(self):
+        self.user = User.objects.create_user(username='testuser', password='testpass')
+
+        refresh = RefreshToken.for_user(self.user)
+        self.access_token = str(refresh.access_token)
+
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.access_token)
+
         self.list_url = reverse('task-list')
         self.task = Task.objects.create(
             title="Initial Task",

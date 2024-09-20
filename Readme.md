@@ -39,7 +39,7 @@ Channels for real-time updates on task status changes.
 - **Filtering**: Filter tasks by status, priority, and creation date.
 - **Caching**: Implement caching for API responses to improve performance.
 - **WebSocket Notifications**: Real-time notifications when a task's status changes.
-- **Testing**: Comprehensive unit tests for models, views, and WebSocket consumers.
+- **Testing**: Comprehensive unit tests for views and WebSocket consumers.
 - **Dockerized Environment**: Easy setup and deployment using Docker and Docker Compose.
 - **Dependency Management**: Managed via Poetry for consistent and reproducible builds.
 
@@ -62,8 +62,7 @@ Channels for real-time updates on task status changes.
 │   │   ├── routing.py  
 │   │   ├── mixins.py  
 │   │   └── tests/  
-│   │       ├── __init__.py  
-│   │       ├── test_models.py  
+│   │       ├── __init__.py   
 │   │       ├── test_api.py  
 │   │       ├── test_consumers.py  
 │   │       └── test_cache.py  
@@ -93,23 +92,23 @@ Channels for real-time updates on task status changes.
 
 ```bash  
 git clone https://github.com/yourusername/task-management-system.gitcd task-management-system```  
-  
+```
 ### Install Dependencies  
   
-We use **Poetry** for dependency management.  
+I use **Poetry** for dependency management.  
   
 1. **Install Poetry** (if not already installed):  
   
    ```bash  
-  curl -sSL https://install.python-poetry.org | python3 - ```  
-  Or follow the instructions from the [Poetry official website](https://python-poetry.org/docs/#installation).  
-  
+    curl -sSL https://install.python-poetry.org | python3 -
+   ```  
+  Or follow the instructions from the [Poetry official website](https://python-poetry.org/docs/#installation).
 2. **Install Dependencies**:  
   
    ```bash  
-  poetry install ```  
-  This will create a virtual environment and install all the required packages.  
-  
+    poetry install 
+   ```  
+  This will create a virtual environment and install all the required packages. 
 ### Set Up Environment Variables  
   
 Create a `.env` file in the project root directory:  
@@ -145,14 +144,16 @@ credentials.
 Build the Docker images using Docker Compose:
 
 ```bash  
-docker-compose build```  
+docker-compose build
+```  
   
 ### Running Docker Containers  
   
 Start the containers:  
   
 ```bash  
-docker-compose up```  
+docker-compose up
+```  
   
 This command will:  
   
@@ -164,19 +165,15 @@ This command will:
   
 ## Database Setup  
   
-### Running Migrations  
-  
-Apply the migrations to set up the database schema:  
-  
-```bash  
-docker-compose exec web python manage.py migrate```  
+
   
 ### Creating a Superuser  
   
 Create a superuser to access the Django admin interface:  
   
 ```bash  
-docker-compose exec web python manage.py createsuperuser```  
+docker-compose exec web python manage.py createsuperuser
+```  
   
 Follow the prompts to set up the superuser credentials.  
   
@@ -187,17 +184,13 @@ Follow the prompts to set up the superuser credentials.
 With the Docker containers running, you can access the application at:  
   
 ```  
-
 http://localhost:8000/
-
 ```  
   
 To access the Django admin interface:  
   
 ```  
-
 http://localhost:8000/admin/
-
 ```  
   
 ---  
@@ -312,7 +305,7 @@ The application uses WebSocket to send real-time updates when a task's status ch
 ### Example Usage
 
 You can use a WebSocket client (like [WebSocket King](https://websocketking.com/)
-or [websocat](https://github.com/vi/websocat)) to connect to the WebSocket endpoint.
+or [websocat](https://github.com/vi/websocat)) or Postman to connect to the WebSocket endpoint.
 
 When a task's status is updated, a message like the following will be sent:
 
@@ -332,13 +325,12 @@ When a task's status is updated, a message like the following will be sent:
 To run the test suite, execute:
 
 ```bash  
-docker-compose exec web python manage.py test```  
+docker-compose exec web python manage.py test
+```  
   
 This will run all unit tests for the application, including:  
-  
-- Model tests  
+
 - API tests  
-- WebSocket consumer tests  
-- Cache tests  
+- WebSocket consumer tests   
   
 ---  
