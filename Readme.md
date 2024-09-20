@@ -91,7 +91,7 @@ Channels for real-time updates on task status changes.
 ### Clone the Repository
 
 ```bash  
-git clone https://github.com/yourusername/task-management-system.gitcd task-management-system```  
+git clone https://github.com/yourusername/task-management-system.gitcd task-management-system
 ```
 ### Install Dependencies  
   
@@ -129,7 +129,7 @@ REDIS_PORT=6379
   
 # Django settings  
 SECRET_KEY=your_secret_key  
-DEBUG=1  
+DEBUG=True  
 ```  
 
 **Note:** Replace `your_db_name`, `your_db_user`, `your_db_password`, and `your_secret_key` with your actual
@@ -153,7 +153,7 @@ Start the containers:
   
 ```bash  
 docker-compose up
-```  
+```
   
 This command will:  
   
