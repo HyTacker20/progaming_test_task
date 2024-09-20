@@ -204,7 +204,55 @@ http://localhost:8000/admin/
 - **Create Task**: `POST /api/v1/tasks/`  
 - **Update Task**: `PUT /api/v1/tasks/{id}/`  
 - **Partial Update Task**: `PATCH /api/v1/tasks/{id}/`  
-- **Delete Task**: `DELETE /api/v1/tasks/{id}/`  
+- **Delete Task**: `DELETE /api/v1/tasks/{id}/`
+
+### Filtering Tasks
+
+The API supports filtering tasks based on the following fields:
+
+- **Status**: Filter tasks by their status (`New`, `In progress`, `Completed`).
+- **Priority**: Filter tasks by their priority (`Low`, `Medium`, `High`).
+- **Created At**: Filter tasks by their creation date.
+
+#### Filter Parameters
+
+- `status`: Filter by task status.
+- `priority`: Filter by task priority.
+- `created_at`: Filter by creation date (supports date range filtering).
+
+#### Examples
+
+- **Filter by Status**:
+
+  ```
+  GET /api/v1/tasks/?status=New
+  ```
+
+- **Filter by Priority**:
+
+  ```
+  GET /api/v1/tasks/?priority=High
+  ```
+
+- **Filter by Status and Priority**:
+
+  ```
+  GET /api/v1/tasks/?status=In progress&priority=Medium
+  ```
+
+- **Filter by Creation Date Range**:
+
+  ```
+  GET /api/v1/tasks/?created_at__gte=2023-01-01&created_at__lte=2023-12-31
+  ```
+
+### Examples
+
+#### Get Task List with Filters
+
+```http
+GET /api/v1/tasks/?status=New&priority=High
+```
   
 ### Examples  
   
